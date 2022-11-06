@@ -1,0 +1,28 @@
+{
+
+  "manifest_version": 2,
+  "name": "Tanki online flash interface mod",
+  "version": "1.0",
+
+  "description": "This plugin will modify tanki online new interface to look like old flash interface.",
+
+  "icons": {
+    "48": "icons/icon_48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://tankionline.com/play/*"],
+	  "run_at": "document_start",
+      "js": ["js/tanki_flash_interface_main.js"]
+    }
+  ],
+  
+  "web_accessible_resources": [
+	"images/*",
+	"css/*",
+	"html/*",
+	"fonts/*"
+  ]
+
+}

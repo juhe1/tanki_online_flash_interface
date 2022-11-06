@@ -1,0 +1,46 @@
+.checkmark_container {
+	float: left;
+	position: relative;
+	cursor: pointer;
+	height: 40px;
+}
+
+.checkmark_container input {
+	position: relative;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 27px;
+	width: 27px;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/default.png);
+}
+
+.checkmark_container:hover input ~ .checkmark {
+	cursor: pointer;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/hover.png);
+}
+
+.checkmark_container:hover input:checked ~ .checkmark {
+	cursor: pointer;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/checked_mark.png), url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/hover.png);
+}
+
+.checkmark_container:active input ~ .checkmark {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/releaseBitmapGoogle.png);
+}
+
+.checkmark_container:active input:checked ~ .checkmark {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/checked_mark.png), url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/down.png);
+}
+
+
+.checkmark_container input:checked ~ .checkmark {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/checked_mark.png), url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/default.png);
+}

@@ -1,0 +1,53 @@
+@font-face {
+	font-family: tanki_font;
+	src: url(MyriadPro.woff);
+}
+
+.bottom_bar {
+	z-index: -1;
+	position: absolute;
+	height: 200px;
+	width: 320px;
+	margin-top: 100px;
+	margin-left: 20px;
+}
+
+.social_media_login_text {
+	margin-top: 130px;
+	margin-bottom: 5px;
+	margin-left: 90px;
+}
+
+.google_button {
+	cursor: pointer;
+	margin-left: 25%;
+	float: left;
+	width: 70px;
+	height: 30px;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/social_media_buttons/releaseBitmapGoogle.png);
+}
+
+.google_button:hover {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/social_media_buttons/hoveredBitmapGoogle.png);
+}
+
+.google_button:active {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/social_media_buttons/pressedBitmapGoogle.png);
+}
+
+.facebook_button {
+	cursor: pointer;
+	margin-left: 5px;
+	float: left;
+	width: 70px;
+	height: 30px;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/social_media_buttons/releaseBitmapFB.png);
+}
+
+.facebook_button:hover {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/social_media_buttons/hoveredBitmapFB.png);
+}
+
+.facebook_button:active {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/social_media_buttons/pressedBitmapFB.png);
+}
