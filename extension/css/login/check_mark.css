@@ -1,3 +1,8 @@
+@font-face {
+	font-family: tanki_font;
+	src: url(chrome-extension://__MSG_@@extension_id__/fonts/MyriadPro.woff);
+}
+
 .checkmark_container {
 	float: left;
 	position: relative;
@@ -33,7 +38,7 @@
 }
 
 .checkmark_container:active input ~ .checkmark {
-	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/releaseBitmapGoogle.png);
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/login/check_box/down.png);
 }
 
 .checkmark_container:active input:checked ~ .checkmark {

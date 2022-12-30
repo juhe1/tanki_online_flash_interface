@@ -13,16 +13,17 @@
   "content_scripts": [
     {
       "matches": ["*://tankionline.com/play/*"],
-	  "run_at": "document_start",
-      "js": ["js/tanki_flash_interface_main.js"]
+  	  "run_at": "document_start",
+        "js": ["js/tanki_flash_interface_main.js"]
     }
   ],
-  
+
   "web_accessible_resources": [
-	"images/*",
-	"css/*",
-	"html/*",
-	"fonts/*"
+  	"images/*",
+  	"css/*.css",
+  	"html/*",
+  	"fonts/*",
+    "main.css"
   ]
 
 }

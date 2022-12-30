@@ -1,3 +1,8 @@
+@font-face {
+	font-family: tanki_font;
+	src: url(chrome-extension://__MSG_@@extension_id__/fonts/MyriadPro.woff);
+}
+
 .play_button {
     display:inline-block;
 	margin-left: 30px;

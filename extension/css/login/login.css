@@ -3,11 +3,14 @@
 	src: url(chrome-extension://__MSG_@@extension_id__/fonts/MyriadPro.woff);
 }
 
-body {
-	height: 1000px;
+.main_div {
+	position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 50px));
 }
 
-.tank_window { 
+.tank_window {
 	overflow: hidden;
 	font-family: tanki_font;
 	font-size: 12.5px;
@@ -29,13 +32,12 @@ body {
 .tank_header {
 	position: relative;
 	left: 50%;
-	top: 16px;
-	margin-left: -115px;
+	margin-left: -116px;
+	top: 15px;
 }
 
 .login {
 	width: 361px;
-	margin-bottom: 500px;
 }
 
 .username_text {
