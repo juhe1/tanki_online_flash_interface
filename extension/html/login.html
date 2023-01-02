@@ -7,63 +7,71 @@
 	<link rel="stylesheet" href="chrome-extension://lppajkpdokelhokcolgmoimaajkfbgeg/css/login/check_mark.css">
 	<link rel="stylesheet" href="chrome-extension://lppajkpdokelhokcolgmoimaajkfbgeg/css/login/play_button.css">
 	<link rel="stylesheet" href="chrome-extension://lppajkpdokelhokcolgmoimaajkfbgeg/css/login/bottom_bar.css">
-	<link rel="stylesheet" href="chrome-extension://lppajkpdokelhokcolgmoimaajkfbgeg/css/background.css">
+	<link rel="stylesheet" href="chrome-extension://lppajkpdokelhokcolgmoimaajkfbgeg/css/tanki_elements/tank_window.css">
 </head>
 
 <body>
 
-	<div class="main_div">
+	<div class="login_main_div">
 
-		<div class="bottom_bar">
-			<div class="tank_window_background">
-				<div class="tank_window">
-					<p class="social_media_login_text">Enter the game using</p>
-					<div class="google_button"></div>
-					<div class="facebook_button"></div>
-				</div>
-			</div>
+	<div class="bottom_bar">
+	<div class="tank_window_container">
+
+		<div class="tank_window"></div>
+
+		<div class="bottom_bar_content">
+			<p class="social_media_login_text">Enter the game using</p>
+			<div class="google_button"></div>
+			<div class="facebook_button"></div>
 		</div>
 
+	</div>
+	</div>
+
 		<div id="login" class="login">
-			<image id="login_header" src="chrome-extension://lppajkpdokelhokcolgmoimaajkfbgeg/images/tank_window/login_header.png" class="tank_header"></image>
-			<div class="tank_window_background">
-				<div class="tank_window">
+			<image id="login_header" src="chrome-extension://lppajkpdokelhokcolgmoimaajkfbgeg/images/login/login_header.png" class="tank_header"></image>
 
-					<div class="login_window_left_div">
-						<div>
-							<p class="username_text">Login or email:</p>
-						</div>
+			<div class="tank_window_container">
+				<div class="tank_window"></div>
 
-						<div>
-							<p class="password_text">Password:</p>
-						</div>
-					</div>
+				<div class="login_content">
 
-					<div class="login_window_right_div">
-						<div class="links">
-							<a class="register_link" href=".">New player</a>
-							<a class="lost_account_link" href=".">Lost nickname or password?</a>
-						</div>
-
-						<input class="tank_input" id="username_input"></input>
-						<input class="tank_input" type="password" id="password_input"></input>
-
-						<div class="check_and_button">
-
-							<label class="checkmark_container">
-								<input type="checkbox" checked="checked" id="check_box">
-								<span class="checkmark"></span>
-							</label>
-							<p class="remember_me_text">Remember me</p>
-
-							<div class="play_button" id="play_button">
-								<div class="button_left"></div> <div class="button_middle">Play</div> <div class="button_right"></div>
+						<div class="login_window_left_div">
+							<div>
+								<p class="username_text">Login or email:</p>
 							</div>
 
+							<div>
+								<p class="password_text">Password:</p>
+							</div>
 						</div>
+
+						<div class="login_window_right_div">
+							<div class="links">
+								<a class="register_link" href=".">New player</a>
+								<a class="lost_account_link" href=".">Lost nickname or password?</a>
+							</div>
+
+							<input class="tank_input" id="username_input"></input>
+							<input class="tank_input" type="password" id="password_input"></input>
+
+							<div class="check_and_button">
+
+								<label class="checkmark_container">
+									<input type="checkbox" checked="checked" id="check_box">
+									<span class="checkmark"></span>
+								</label>
+								<p class="remember_me_text">Remember me</p>
+
+								<div class="play_button" id="play_button">
+									<div class="button_left"></div> <div class="button_middle">Play</div> <div class="button_right"></div>
+								</div>
+
+							</div>
+						</div>
+
 					</div>
 
-				</div>
 			</div>
 		</div>
 

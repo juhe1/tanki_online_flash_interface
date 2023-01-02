@@ -3,30 +3,15 @@
 	src: url(chrome-extension://__MSG_@@extension_id__/fonts/MyriadPro.woff);
 }
 
-.main_div {
+.login_main_div {
 	position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, calc(-50% - 50px));
-}
 
-.tank_window {
-	overflow: hidden;
 	font-family: tanki_font;
+	color: white;
 	font-size: 12.5px;
-	color: white;
-
-	border: 12px solid black;
-	border-image: url(chrome-extension://__MSG_@@extension_id__/images/tank_window/tank_window_border_v2.png) 10% 10% repeat;
-	border-image-outset: 5px;
-}
-
-.tank_window_background {
-	color: white;
-	border-radius: 3px;
-
-	background-repeat: repeat-x-y;
-	background-image: url(chrome-extension://__MSG_@@extension_id__/images/tank_window/default_background.png);
 }
 
 .tank_header {
@@ -38,6 +23,11 @@
 
 .login {
 	width: 361px;
+}
+
+.login_content {
+	display:inline-block;
+	padding: 6px;
 }
 
 .username_text {

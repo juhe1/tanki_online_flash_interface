@@ -1,0 +1,88 @@
+body {
+	background-repeat: repeat-x-y;
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/background.png);
+}
+
+.loading_main_div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, calc(-50% - 50px));
+
+	font-family: tanki_font;
+	color: white;
+	font-size: 12.5px;
+}
+
+.tip_image {
+	margin-top: 3px;
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-bottom: 2px;
+}
+
+.tube {
+	margin-bottom: 7px;
+	margin-right: 5px;
+	margin-left: 5px;
+	position: relative;
+}
+
+.goo_mask {
+	-webkit-mask-image: url(chrome-extension://__MSG_@@extension_id__/images/loading/tube/mask.png);
+	height: 30px;
+	position: absolute;
+	width: 589px;
+}
+
+.goo {
+	height: 30px;
+	margin-top: 2px;
+	position: absolute;
+
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/loading/tube/goo.png);
+	background-repeat: repeat-x;
+	background-position: 20px 0;
+
+	animation: goo_move_repeat 0.5s linear infinite;
+}
+
+@keyframes goo_move_repeat {
+  from {background-position: 0px 0;}
+  to {background-position: 66px 0;}
+}
+
+.tube_empty {
+	display: flex;
+	z-index: -1;
+	right: 0;
+	left: 0;
+}
+
+.tube_left {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/loading/tube/tube_left.png);
+    display:inline-block;
+    height: 30px;
+    width: 6px;
+    float:left;
+}
+
+.tube_middle {
+	user-select: none;
+    background-image: url(chrome-extension://__MSG_@@extension_id__/images/loading/tube/tube_middle.png);
+	background-repeat: repeat-x;
+
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    float:left;
+    line-height:30px;
+	flex: 1;
+}
+
+.tube_right {
+	background-image: url(chrome-extension://__MSG_@@extension_id__/images/loading/tube/tube_right.png);
+    height: 30px;
+    width: 6px;
+    float:left;
+}
