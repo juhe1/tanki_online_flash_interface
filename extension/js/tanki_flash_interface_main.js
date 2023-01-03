@@ -1,5 +1,3 @@
-currentLayout = null
-
 function loadStyle(styleFilePath) {
 	const path = chrome.extension.getURL(styleFilePath);
 
@@ -21,7 +19,7 @@ function addHeadToDocument(head) {
 
 	for (const element of elements) {
 
-		// add tfim_allow_style atribute to element if the element is css link thing
+		// add tfim_allow_style atribute to element if the element is css link thing, becuase that will prevent css disable code for disabling the css
 		if (element.rel == "stylesheet") {
 			element.dataset.tfim_allow_style = "";
 		}
@@ -59,9 +57,25 @@ const speedMultiplierIncrease = 0.01;
 const stopIncrease = 10;
 
 class LoadinScreenLayout {
+	static layoutName = "LoadinScreenLayout";
+
 	constructor() {
-		this.layoutName = "LoadinScreenLayout";
 		this.speedMultiplier = 5;
+	}
+
+	// we have 2 different detecting methods, because tanki online has 2 kind of loading screens
+	static isOriginalLayoutLoaded() {
+		const progressElement = document.getElementById("loading-text");
+
+		if (progressElement != null) {
+			return true;
+		}
+
+		const nextHintElements = document.getElementsByClassName("sc-bxivhb kBriwm");
+
+		if (nextHintElements.length != 0) {
+			return true;
+		}
 	}
 
 	async load() {
@@ -127,9 +141,19 @@ class LoadinScreenLayout {
 	}
 }
 
+
 class LoginLayout {
+	static layoutName = "LoginLayout";
+
 	constructor() {
-		this.layoutName = "LoginLayout";
+	}
+
+	static isOriginalLayoutLoaded() {
+		const userNameElement = document.getElementById("username");
+
+		if (userNameElement != null) {
+			return true;
+		}
 	}
 
 	async load() {
@@ -172,56 +196,61 @@ class LoginLayout {
 	}
 
 	unload() {
+		document.getElementById("login_main_div").remove();
 	}
 }
 
-function checkForLoginLayout(_currentLayout) {
-	if (_currentLayout != null) {
-		if (_currentLayout.constructor.name == LoginLayout.name) {
-			return;
+
+class MainMenuLayout {
+	static layoutName = "MainMenuLayout";
+
+	constructor() {
+	}
+
+	static isOriginalLayoutLoaded() {
+		const logoElements = document.getElementsByClassName("sc-bwzfXH stibK");
+
+		if (logoElements.length != 0) {
+			return true;
 		}
 	}
 
-	const userNameElement = document.getElementById("username");
+	async load() {
 
-	if (userNameElement != null) {
-		return new LoginLayout();
+	}
+
+	unload() {
 	}
 }
 
-function checkForLoadingLayout(_currentLayout) {
-	if (_currentLayout != null) {
-		if (_currentLayout.constructor.name == LoadinScreenLayout.name) {
-			return null;
-		}
-	}
-
-	const progressElement = document.getElementById("loading-text");
-
-	if (progressElement != null) {
-		return new LoadinScreenLayout();
-	}
-}
-
-const checkFunctions = [
-	checkForLoadingLayout,
-	checkForLoginLayout
+const layoutClasses = [
+	LoadinScreenLayout,
+	LoginLayout,
+	MainMenuLayout
 ];
 
+currentLayout = null
+
+// note that with layouts i mean for example garage, login, loading screen
 // this function will check that did layout change
 function checkLayout() {
-	for (const checkFunction of checkFunctions) {
-		layout = checkFunction(currentLayout);
+	for (const layoutClass of layoutClasses) {
 
-		if (layout != null) {
+		// continue if layout is already loaded
+		if (currentLayout != null && currentLayout.constructor.layoutName == layoutClass.layoutName) {
+			continue;
+		}
+
+		// unload old layout and load new layout if tanki online changed active layout
+		if (layoutClass.isOriginalLayoutLoaded()) {
 
 			if (currentLayout != null) {
 				currentLayout.unload();
 			}
 
-			currentLayout = layout;
-			console.log("current layout: " + currentLayout.layoutName)
-			layout.load();
+			currentLayout = new layoutClass();
+			currentLayout.load();
+			console.log("current layout: " + currentLayout.constructor.layoutName)
 		}
 	}
 }
@@ -253,7 +282,6 @@ function initLayoutChangeDetector() {
 	// check for layout change, everytime when dom is modified
 	const mutationCallback = (mutationList, observer) => {
 		disableCss(); // TODO: this is kinda laggy so change it to disable css only from new elements
-		initScrollLock();
 		checkLayout();
 	}
 
@@ -266,6 +294,7 @@ function initLayoutChangeDetector() {
 function main() {
 	console.log("Tanki flash interface mod is running!");
 	initLayoutChangeDetector();
+	initScrollLock();
 }
 
 main();
