@@ -5,7 +5,7 @@ iframe {
 }
 
 body {
-  overflow: hidden;
+	//overflow: hidden;
 
 	background-repeat: repeat-x-y;
 	background-image: url(chrome-extension://__MSG_@@extension_id__/images/background.png);

@@ -50,14 +50,70 @@ function writeToInputBox(inputBoxId, text) {
 	document.execCommand('insertText', false, text);
 }
 
+// this function will call the callback function when element that is using className is found
+function waitForElementByClass(className, callback) {
+	var stop = false;
+	var observer = new MutationObserver(function(mutationsList) {
+		mutationsList.forEach(function(mutation) {
+			if (stop) {return;}
+			if (mutation.type === 'childList') {
+				var elements = document.getElementsByClassName(className);
+				for (var i = 0; i < elements.length; i++) {
+					// Check if the element matches the desired class name
+					if (elements[i].classList.value == className) {
+						stop = true;
+						observer.disconnect(); // Stop observing once the element is found
+						callback(elements[i]); // Call the callback function with the element
+						return; // Exit the loop
+					}
+				}
+			}
+		});
+	});
+
+	observer.observe(document.body, { childList: true, subtree: true });
+}
+
+class StartScreenLayout {
+	static layoutName = "StartScreenLayout";
+
+	constructor() {
+	}
+
+	static isOriginalLayoutLoaded() {
+		const clickAnyButtonToStartElement = document.getElementsByClassName("ksc-0 StartScreenComponentStyle-text");
+
+		if (clickAnyButtonToStartElement.length != 0) {
+			return true;
+		}
+	}
+
+	clickStartButton() {
+		const startButton = document.getElementsByClassName("ksc-0 StartScreenComponentStyle-text")[0];
+		startButton.click();
+	}
+
+	async load() {
+		loadStyle("css/main.css");
+
+		// the idea of this is to push all original elements out of the window
+		await loadHtml("html/push_original_elements_out.html");
+
+		this.clickStartButton();
+	}
+
+	unload() {
+	}
+}
+
 const imageCount = 36;
 const imageChangeDelay = 5000;
 const gooMaxLength = 589;
 const speedMultiplierIncrease = 0.01;
 const stopIncrease = 10;
 
-class LoadinScreenLayout {
-	static layoutName = "LoadinScreenLayout";
+class LoadingScreenLayout {
+	static layoutName = "LoadingScreenLayout";
 
 	constructor() {
 		this.speedMultiplier = 5;
@@ -79,11 +135,6 @@ class LoadinScreenLayout {
 	}
 
 	async load() {
-		loadStyle("css/main.css");
-
-		// the idea of this is to push all original elements out of the window
-		await loadHtml("html/push_original_elements_out.html");
-
 		await loadHtml("html/loading.html");
 
 		this.changeImage();
@@ -149,9 +200,9 @@ class LoginLayout {
 	}
 
 	static isOriginalLayoutLoaded() {
-		const userNameElement = document.getElementById("username");
+		const entranceTitleElement = document.getElementsByClassName("ksc-0 MainEntranceComponentStyle-title");
 
-		if (userNameElement != null) {
+		if (entranceTitleElement.length != 0) {
 			return true;
 		}
 	}
@@ -163,36 +214,37 @@ class LoginLayout {
 	}
 
 	playClicked() {
+		waitForElementByClass("ksc-21 Common-flexCenterAlignCenter", () => {this.onAuthorizationButtonCreated()});
+
+		const gameAccountButtonElement = document.getElementsByClassName("ksc-0 RoundBigButtonComponentStyle-commonContainer")[0];
+		gameAccountButtonElement.click();
+	}
+
+	setRememberMeCheckBox(state) {
+		const checkBoxElement = document.getElementsByClassName("ksc-12 CheckBoxStyle-checkbox")[0];
+
+		if (!state) {
+			checkBoxElement.click();
+		}
+	}
+
+	onAuthorizationButtonCreated() {
+		waitForElementByClass("ksc-33 EntranceComponentStyle-helpLink", () => {this.onLoginFormCreated()});
+		var authorizationButtonElement = document.getElementsByClassName("ksc-0 RoundBigButtonComponentStyle-commonContainer")[1];
+		authorizationButtonElement.click();
+	}
+
+	onLoginFormCreated() {
 		const userName = document.getElementById("username_input").value;
 		const password = document.getElementById("password_input").value;
 		const rememberMe = document.getElementById("check_box").checked;
 
-		this.tryLogin(userName, password, rememberMe);
-	}
-
-	setRememberMeCheckBox(state) {
-		const onElement = document.getElementsByClassName("sc-bxivhb bCVAbE");
-		const offElement = document.getElementsByClassName("sc-bxivhb knLUAV");
-
-		if(offElement.length == 0 && state == false) {
-			onElement[0].click();
-			return;
-		}
-		if (onElement.length == 0 && state == true) {
-			offElement[0].click()
-			return;
-		}
-
-	}
-
-	tryLogin(userName, password, rememberMe) {
 		writeToInputBox("username", userName);
 		writeToInputBox("password", password);
-		this.setRememberMeCheckBox(rememberMe)
+		this.setRememberMeCheckBox(rememberMe);
 
-		// emulate play button click
-		const originalPlayButton = document.getElementsByClassName("sc-bwzfXH jplTTR")[0];
-		originalPlayButton.click()
+		const originalPlayButton = document.getElementsByClassName("ksc-34 Common-flexCenterAlignCenter EntranceComponentStyle-buttonActive EntranceComponentStyle-styleButtons Font-normal Common-flexCenterAlignCenter Common-displayFlex Common-alignCenter")[0];
+		originalPlayButton.click();
 	}
 
 	unload() {
@@ -208,7 +260,7 @@ class MainMenuLayout {
 	}
 
 	static isOriginalLayoutLoaded() {
-		const logoElements = document.getElementsByClassName("sc-bwzfXH stibK");
+		const logoElements = document.getElementsByClassName("ksc-0 UserInfoContainerStyle-blockForIconTankiOnline");
 
 		if (logoElements.length != 0) {
 			return true;
@@ -224,7 +276,8 @@ class MainMenuLayout {
 }
 
 const layoutClasses = [
-	LoadinScreenLayout,
+	StartScreenLayout,
+	LoadingScreenLayout,
 	LoginLayout,
 	MainMenuLayout
 ];
@@ -294,7 +347,7 @@ function initLayoutChangeDetector() {
 function main() {
 	console.log("Tanki flash interface mod is running!");
 	initLayoutChangeDetector();
-	initScrollLock();
+	//initScrollLock();
 }
 
 main();
